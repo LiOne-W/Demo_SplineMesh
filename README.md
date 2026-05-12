@@ -39,3 +39,22 @@
 如果要在 Runtime 下动态生成 `SplineMesh`，请确保新建的 `SplineMeshComponent` 的 Mobility 为 **Movable**，而不是 **Static**。否则可能出现运行时更新失败或显示不符合预期的问题。
 
 ![SplineMesh 运行效果](./imgs/2.png)
+
+```
+{
+  // 设置 splineMesh 的属性。 
+  SplineMC->SetMobility(EComponentMobility::Movable);
+  SplineMC->SetStaticMesh(SMNav);
+  SplineMC->SetForwardAxis(ESplineMeshAxis::Y, true);
+  SplineMC->SetSplineUpDir(FVector(0.0, 1.0, 0.0);
+  SplineMC->SetStartScale(FVector2d(1.0, 1.0);
+  SplineMC->SetEndScale(FVector2d(1.0, 1.0);
+  // 设置 splineMesh 的材质。
+  UMaterialInstanceDynamic* MIDNav = SplineMC->CreateDynamicMaterialInstance(0, MINav);
+  MIDNav->SetScalarParameterValue(TEXT("name", value);
+  SplineMC->SetMaterial(0, MIDNav);
+  // 设置 splineMesh 的依附规则。
+  SplineMC->AttachToComponent(SplineShow, FAttachmentTransformRules(EAttachmentRule::KeepRelative, true));
+  SplineMC->SetStartAndEnd(startLoc, startTan, endLoc, endTan, true);
+}
+```
